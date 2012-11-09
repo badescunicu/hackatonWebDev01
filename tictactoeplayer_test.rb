@@ -1,6 +1,8 @@
 require 'test/unit'
 
 class TicTacToePlayer
+  def turn
+  end
 end
 
 class TestPlayer < Test::Unit::TestCase

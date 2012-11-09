@@ -87,11 +87,11 @@ class TestPlayer < Test::Unit::TestCase
     end
   end
 
-#def test_winner
-#    tttp = TicTacToePlayer.new('X')
-#    assert_equal(tttp.turn({@owned_by_x => [:b1, :b2, :b3], @owned_by_zero =>
-#                           [:c1, :a1, :c3]}), 'X won')
-#  end
+  def test_winner
+    tttp = TicTacToePlayer.new('X')
+    assert_equal(tttp.turn({@owned_by_x => [:b1, :b2, :b3], @owned_by_zero =>
+                           [:c1, :a1, :c3]}), 'X won')
+  end
 
   def test_respond_to_name
     tttp = TicTacToePlayer.new('X')

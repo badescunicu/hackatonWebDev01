@@ -12,6 +12,9 @@ class TicTacToePlayer
           gamestate.values[1] != nil) )
           raise ArgumentError
     end
+
+
+
   end
 end
 
@@ -51,6 +54,10 @@ class TestPlayer < Test::Unit::TestCase
       tttp.turn('test')
       tttp.turn([2,1,3])
     end
+  end
+
+  def test_class_has_constructor
+    tttp = TicTacToePlayer.new('test')
   end
 
 end

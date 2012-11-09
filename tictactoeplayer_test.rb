@@ -49,10 +49,6 @@ WINNING_COMBINATIONS = [[:a1, :a2, :a3],
       end
     end
 
-# if( @owned_by_x.length + @owned_by_zero.length >= 9)
-#      return 'Tie'
-#    end
-
     if( @nume == 'X' )
       @owned_by_x << (BOARD - @owned_by_x - @owned_by_zero).sample
     else
@@ -119,6 +115,11 @@ class TestPlayer < Test::Unit::TestCase
     assert_respond_to(tttp, :nume)
   end
 
+  def test_tie
+    tttp = TicTacToePlayer.new('X')
+    assert_equal(tttp.turn({:owned_by_x => [:a1, :a1, :a1, :a1, :a2],
+                           :owned_by_zero => [:b1, :b1, :b1, :b1, :b1]}), 'Tie')
+  end
 
 end
 

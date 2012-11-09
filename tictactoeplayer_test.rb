@@ -1,7 +1,7 @@
 require 'test/unit'
 
 class TicTacToePlayer
-  def turn
+  def turn(gamestate)
   end
 end
 

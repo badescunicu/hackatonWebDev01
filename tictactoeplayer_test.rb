@@ -29,7 +29,7 @@ WINNING_COMBINATIONS = [[:a1, :a2, :a3],
     if( gamestate.class.to_s != "Hash" )
       raise ArgumentError
     elsif( gamestate.keys.length != 2)
-        raise ArgumentError
+      raise ArgumentError
     elsif( (gamestate.values[0].class.to_s != "Array" &&
           gamestate.values[0] != nil ) ||
           (gamestate.values[1].class.to_s != "Array" &&
@@ -39,6 +39,14 @@ WINNING_COMBINATIONS = [[:a1, :a2, :a3],
 
     @owned_by_x = gamestate[:owned_by_x].to_a
     @owned_by_zero = gamestate[:owned_by_zero].to_a
+
+    if( @nume == 'X' )
+      @owned_by_x << (BOARD - @owned_by_x - @owned_by_zero).sample
+    else
+      @owned_by_zero << (BOARD - @owned_by_x - @owned_by_zero).sample
+    end
+
+    gamestate = {:owned_by_x => @owned_by_x, :owned_by_zero => @owned_by_zero}
 
     WINNING_COMBINATIONS.each do |wcomb|
       if( wcomb - @owned_by_x).empty?
@@ -53,16 +61,7 @@ WINNING_COMBINATIONS = [[:a1, :a2, :a3],
       return 'Tie'
     end
 
-    if( @nume == 'X' )
-      @owned_by_x << (BOARD - @owned_by_x - @owned_by_zero).sample
-    else
-      @owned_by_zero << (BOARD - @owned_by_x - @owned_by_zero).sample
-    end
-
-    gamestate = {:owned_by_x => @owned_by_x, :owned_by_zero => @owned_by_zero}
     return gamestate
-
-
   end
 end
 

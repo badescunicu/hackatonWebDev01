@@ -19,6 +19,10 @@ WINNING_COMBINATIONS = [[:a1, :a2, :a3],
     @nume = nume
   end
 
+  def name
+    @name
+  end
+
   def turn(gamestate)
     if( gamestate.class.to_s != "Hash" )
       raise ArgumentError

@@ -49,6 +49,10 @@ WINNING_COMBINATIONS = [[:a1, :a2, :a3],
       end
     end
 
+    if( @owned_by_x.length + @owned_by_zero.length >= 9 )
+      return 'Tie'
+    end
+
     if( @nume == 'X' )
       @owned_by_x << (BOARD - @owned_by_x - @owned_by_zero).sample
     else

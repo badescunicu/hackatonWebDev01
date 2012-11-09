@@ -2,10 +2,21 @@ require 'test/unit'
 
 class TicTacToePlayer
 
+BOARD = [:a1, :a2, :a3, :b1, :b2, :b3, :c1, :c2, :c3]
+WINNING_COMBINATIONS = [[:a1, :a2, :a3],
+                          [:b1, :b2, :b3],
+                          [:c1, :c2, :c3],
+                          [:a1, :b1, :c1],
+                          [:a2, :b2, :c2],
+                          [:a3, :b3, :c3],
+                          [:a1, :b2, :c3],
+                          [:c1, :b2, :a3]]
+
   def initialize(nume = 'X')
     if( nume != 'X' && nume != '0')
       raise ArgumentError
     end
+    @nume = nume
   end
 
   def turn(gamestate)
@@ -19,7 +30,6 @@ class TicTacToePlayer
           gamestate.values[1] != nil) )
           raise ArgumentError
     end
-
 
 
   end
@@ -72,5 +82,17 @@ class TestPlayer < Test::Unit::TestCase
     tttp = TicTacToePlayer.new('random')
     end
   end
+
+#def test_winner
+#    tttp = TicTacToePlayer.new('X')
+#    assert_equal(tttp.turn({@owned_by_x => [:b1, :b2, :b3], @owned_by_zero =>
+#                           [:c1, :a1, :c3]}), 'X won')
+#  end
+
+  def test_respond_to_name
+    tttp = TicTacToePlayer.new('X')
+    assert_respond_to(tttp, :name)
+  end
+
 end
 

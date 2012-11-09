@@ -64,5 +64,10 @@ class TestPlayer < Test::Unit::TestCase
     tttp = TicTacToePlayer.new('test')
   end
 
+  def test_raise_exception_to_invalid_constructor
+    assert_raise do
+    tttp = TicTacToePlayer.new('random')
+    end
+  end
 end
 

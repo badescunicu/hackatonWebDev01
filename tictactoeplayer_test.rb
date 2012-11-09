@@ -18,5 +18,13 @@ class TestPlayer < Test::Unit::TestCase
                       does not respond to test")
   end
 
+  def test_does_not_raise_exception_to_argument
+    assert_nothing_raised do
+      tttp = TicTacToePlayer.new
+      tttp.turn('test')
+    end
+  end
+
+
 end
 

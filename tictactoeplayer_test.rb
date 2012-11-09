@@ -9,4 +9,12 @@ class TestPlayer < Test::Unit::TestCase
     assert( functionality_implemented, failure_message = "Functionality not
             implemented")
   end
+
+  def test_responds_to_turn
+    tttp = TicTacToePlayer.new
+    assert_respond_to( tttp, :turn, failure_message = "An instance of tttPlayer
+                      does not respond to test")
+  end
+
 end
+

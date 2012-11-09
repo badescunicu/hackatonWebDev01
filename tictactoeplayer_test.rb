@@ -2,7 +2,10 @@ require 'test/unit'
 
 class TicTacToePlayer
 
-  def initialize(nume = 'default')
+  def initialize(nume = 'X')
+    if( nume != 'X' && nume != '0')
+      raise ArgumentError
+    end
   end
 
   def turn(gamestate)
@@ -61,11 +64,11 @@ class TestPlayer < Test::Unit::TestCase
   end
 
   def test_class_has_constructor
-    tttp = TicTacToePlayer.new('test')
+    tttp = TicTacToePlayer.new()
   end
 
   def test_raise_exception_to_invalid_constructor
-    assert_raise do
+    assert_raise(ArgumentError) do
     tttp = TicTacToePlayer.new('random')
     end
   end

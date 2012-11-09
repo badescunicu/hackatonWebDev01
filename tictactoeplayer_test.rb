@@ -2,8 +2,21 @@ require 'test/unit'
 
 class TicTacToePlayer
   def turn(gamestate)
+    if( gamestate.class.to_s != "Hash" )
+      raise ArgumentError
+    elsif( gamestate.keys.length != 2)
+        raise ArgumentError
+    elsif( (gamestate.values[0].class.to_s != "Array" &&
+          gamestate.values[0] != nil ) ||
+          (gamestate.values[1].class.to_s != "Array" &&
+          gamestate.values[1] != nil) )
+          raise ArgumentError
+    end
   end
 end
+
+
+
 
 class TestPlayer < Test::Unit::TestCase
   def test_truthiness
@@ -21,7 +34,7 @@ class TestPlayer < Test::Unit::TestCase
   def test_does_not_raise_exception_to_argument
     assert_nothing_raised do
       tttp = TicTacToePlayer.new
-      tttp.turn('test')
+      tttp.turn({:key => nil, :key2 => nil})
     end
   end
 

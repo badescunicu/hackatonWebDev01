@@ -17,10 +17,12 @@ WINNING_COMBINATIONS = [[:a1, :a2, :a3],
       raise ArgumentError
     end
     @nume = nume
+    @owned_by_x = []
+    @owned_by_zero = []
   end
 
-  def name
-    @name
+  def nume
+    @nume
   end
 
   def turn(gamestate)
@@ -34,6 +36,31 @@ WINNING_COMBINATIONS = [[:a1, :a2, :a3],
           gamestate.values[1] != nil) )
           raise ArgumentError
     end
+
+    @owned_by_x = gamestate[:owned_by_x].to_a
+    @owned_by_zero = gamestate[:owned_by_zero].to_a
+
+    WINNING_COMBINATIONS.each do |wcomb|
+      if( wcomb - @owned_by_x).empty?
+        return "X won"
+      end
+      if( wcomb - @owned_by_zero ).empty?
+        return "0 won"
+      end
+    end
+
+# if( @owned_by_x.length + @owned_by_zero.length >= 9)
+#      return 'Tie'
+#    end
+
+    if( @nume == 'X' )
+      @owned_by_x << (BOARD - @owned_by_x - @owned_by_zero).sample
+    else
+      @owned_by_zero << (BOARD - @owned_by_x - @owned_by_zero).sample
+    end
+
+    gamestate = {:owned_by_x => @owned_by_x, :owned_by_zero => @owned_by_zero}
+    return gamestate
 
 
   end
@@ -62,12 +89,6 @@ class TestPlayer < Test::Unit::TestCase
     end
   end
 
-  def test_does_not_raise_exception_to_hash_argument
-    assert_nothing_raised do
-      tttp = TicTacToePlayer.new
-      tttp.turn({:owned_by_x =>[2,1], :owned_by_y =>[3,5]})
-    end
-  end
 
   def test_does_raise_exception_to_invalid_arguments
     assert_raise(ArgumentError) do
@@ -89,14 +110,15 @@ class TestPlayer < Test::Unit::TestCase
 
   def test_winner
     tttp = TicTacToePlayer.new('X')
-    assert_equal(tttp.turn({@owned_by_x => [:b1, :b2, :b3], @owned_by_zero =>
-                           [:c1, :a1, :c3]}), 'X won')
+    assert_equal(tttp.turn({:owned_by_x => [:b1, :b2, :b3], :owned_by_zero =>
+                           []}), 'X won')
   end
 
-  def test_respond_to_name
+  def test_respond_to_nume
     tttp = TicTacToePlayer.new('X')
-    assert_respond_to(tttp, :name)
+    assert_respond_to(tttp, :nume)
   end
+
 
 end
 

@@ -1,6 +1,10 @@
 require 'test/unit'
 
 class TicTacToePlayer
+
+  def initialize(nume = 'default')
+  end
+
   def turn(gamestate)
     if( gamestate.class.to_s != "Hash" )
       raise ArgumentError
